@@ -38,13 +38,13 @@ internal sealed class OilManager : IRegisterable
                 {
                     args.Combat.QueueImmediate(new AHurt()
                     {
-                        hurtAmount = args.NewAmount,
+                        hurtAmount = args.NewAmount - args.OldAmount,
                         targetPlayer = isPlayerShip,
                         hurtShieldsFirst = true,
                         timer = args.NewAmount <= 0 ? 0 : 1.0
                     });
                     args.Ship.Set(OilStatus.Status, oil - 1);
-                    return 0;
+                    return args.OldAmount;
                 }
                 else return args.NewAmount;
             } else return args.NewAmount;

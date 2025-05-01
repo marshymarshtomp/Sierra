@@ -38,24 +38,6 @@ internal sealed class PumpTheGasCard : Card, IRegisterable
     public override List<CardAction> GetActions(State s, Combat c)
         => upgrade switch
         {
-            Upgrade.A => [
-                new AStatus()
-                {
-                    status = Status.heat,
-                    statusAmount = 1,
-                    targetPlayer = true
-                },
-                new AVariableHint()
-                {
-                    status = OilManager.OilStatus.Status,
-                },
-                new AMove()
-                {
-                    dir = 2*s.ship.Get(OilManager.OilStatus.Status),
-                    xHint = 2,
-                    targetPlayer = true
-                }
-            ],
             Upgrade.B => [
                 new AVariableHint()
                 {
@@ -65,7 +47,8 @@ internal sealed class PumpTheGasCard : Card, IRegisterable
                 {
                     dir = 2*s.ship.Get(OilManager.OilStatus.Status),
                     xHint = 2,
-                    targetPlayer = true
+                    targetPlayer = true,
+                    preferRightWhenZero = true
                 },
                 new AStatus()
                 {
@@ -87,9 +70,10 @@ internal sealed class PumpTheGasCard : Card, IRegisterable
                 },
                 new AMove()
                 {
-                    dir = 2*s.ship.Get(OilManager.OilStatus.Status),
+                    dir = 2*Math.Clamp(s.ship.Get(OilManager.OilStatus.Status)-1, 0, s.ship.Get(OilManager.OilStatus.Status)),
                     xHint = 2,
-                    targetPlayer = true
+                    targetPlayer = true,
+                    preferRightWhenZero = true
                 }
             ],
 

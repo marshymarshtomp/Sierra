@@ -54,20 +54,13 @@ internal sealed class MischiefCard : Card, IRegisterable, IHasCustomCardTraits
                     targetPlayer = false
                 },
                 new ADummyAction(),
-                ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
-                        new AStatus(){
-                            status = Status.heat,
-                            statusAmount = 1,
-                            targetPlayer = true
-                        },
-                        ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
-                            new AStatus(){
-                                status = Status.heat,
-                                statusAmount = 1,
-                                targetPlayer = true
-                            }
-                        ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
-                ).AsCardAction
+                ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
+                    new AStatus(){
+                        status = Status.heat,
+                        statusAmount = 1,
+                        targetPlayer = true
+                    }
+                ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
             ],
             Upgrade.B => [
                 new AAttack()
@@ -78,20 +71,13 @@ internal sealed class MischiefCard : Card, IRegisterable, IHasCustomCardTraits
                     statusAmount = 3
                 },
                 new ADummyAction(),
-                ModEntry.Instance.KokoroApi.SpoofedActions.MakeAction(
-                        new AStatus(){
-                            status = Status.heat,
-                            statusAmount = 2,
-                            targetPlayer = true
-                        },
-                        ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
-                            new AStatus(){
-                                status = Status.heat,
-                                statusAmount = 2,
-                                targetPlayer = true
-                            }
-                        ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
-                ).AsCardAction
+                ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
+                new AStatus(){
+                    status = Status.heat,
+                    statusAmount = 2,
+                    targetPlayer = true
+                }
+                ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
             ],
             _ => [
                 new AAttack()

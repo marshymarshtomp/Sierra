@@ -26,8 +26,8 @@ internal sealed class SlimeAndPunishment : Artifact
                 unremovable = false
             },
             Sprite = ModEntry.Instance.Helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/combat/SlimeAndPunishment.png")).Sprite,
-            Name = ModEntry.Instance.AnyLocs.Bind(["artifact", "CheapBeer", "name"]).Localize,
-            Description = ModEntry.Instance.AnyLocs.Bind(["artifact", "CheapBeer", "description"]).Localize
+            Name = ModEntry.Instance.AnyLocs.Bind(["artifact", "SlimeAndPunishment", "name"]).Localize,
+            Description = ModEntry.Instance.AnyLocs.Bind(["artifact", "SlimeAndPunishment", "description"]).Localize
         });
         ModEntry.Instance.Harmony.Patch(
             original: AccessTools.DeclaredMethod(typeof(Combat), nameof(Combat.DestroyDroneAt)),

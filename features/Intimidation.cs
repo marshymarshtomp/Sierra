@@ -80,6 +80,8 @@ internal sealed class IntimidationManager : IRegisterable
         if (c.stuff.GetValueOrDefault(worldX) != __state && __state != null)
         {
             int intimAmt = theOtherPeskyShip.Get(IntimidationStatus.Status);
+            if (intimAmt <= 0)
+                return;
             bool targetPlr = theOtherPeskyShip.isPlayerShip ? true : false;
             c.QueueImmediate(
             [
