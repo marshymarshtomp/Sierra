@@ -16,4 +16,8 @@
 		<ModFiles Include="assets/**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="release\" />
+  </ItemGroup>
+
 </Project>
