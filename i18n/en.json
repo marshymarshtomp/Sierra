@@ -87,9 +87,9 @@
     "Addiction": {
       "name": "Addiction",
       "description": {
-        "A": "\n Gain a <c=cardtrait>discounted</c> <c=card>Booze Cruise</c>.",
-        "B": "\n Gain a <c=cardtrait>discounted</c> <c=card>Booze Cruise</c>.",
-        "None": "\n Gain a <c=cardtrait>discounted</c> <c=card>Booze Cruise</c>."
+        "A": "\nGain a <c=cardtrait>discounted</c> <c=card>Booze Cruise</c>.",
+        "B": "\nGain a <c=cardtrait>discounted</c> <c=card>Booze Cruise</c>.",
+        "None": "\nGain a <c=cardtrait>discounted</c> <c=card>Booze Cruise</c>."
       }
     },
     "HotCommodity": {
