@@ -32,7 +32,7 @@ internal sealed class BarrelRollCard : Card, IRegisterable
     public override CardData GetData(State state)
         => upgrade switch
         {
-            Upgrade.B => new() { cost = 0 },
+            Upgrade.A => new() { cost = 0 },
             _ => new() { cost = 1 },
         };
     public override List<CardAction> GetActions(State s, Combat c)

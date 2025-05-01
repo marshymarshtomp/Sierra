@@ -14,7 +14,6 @@ internal sealed class IntimidationManager : IRegisterable
 {
     private static bool droneGotFuckingAnnihilated = false;
     private static bool fromASpawn = false;
-    private static StuffBase? theMidrowGettingDestroyed;
     private static Ship? theShipAnnihilatingTheMidrow;
     private static Ship? theOtherPeskyShip;
     internal static IStatusEntry IntimidationStatus { get; private set; } = null!;
@@ -82,7 +81,7 @@ internal sealed class IntimidationManager : IRegisterable
         {
             int intimAmt = theOtherPeskyShip.Get(IntimidationStatus.Status);
             bool targetPlr = theOtherPeskyShip.isPlayerShip ? true : false;
-            c.Queue(
+            c.QueueImmediate(
             [
                 new AHurt
                 {
@@ -120,7 +119,7 @@ internal sealed class IntimidationManager : IRegisterable
         if (intimAmt <= 0)
             return;
         bool targetPlr = theOtherPeskyShip.isPlayerShip ? true : false;
-        (MG.inst.g.state?.route as Combat)?.Queue(
+        (MG.inst.g.state?.route as Combat)?.QueueImmediate(
             [
                 new AHurt
                 {

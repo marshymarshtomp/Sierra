@@ -40,7 +40,8 @@ internal sealed class OilManager : IRegisterable
                     {
                         hurtAmount = args.NewAmount,
                         targetPlayer = isPlayerShip,
-                        hurtShieldsFirst = true
+                        hurtShieldsFirst = true,
+                        timer = args.NewAmount <= 0 ? 0 : 1.0
                     });
                     args.Ship.Set(OilStatus.Status, oil - 1);
                     return 0;
