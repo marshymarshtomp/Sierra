@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ModLoaderPath>E:\Pobrane\Nickel_1.15.0\Nickel</ModLoaderPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nickel.ModBuildConfig" Version="2.0.2" />
+    <PackageReference Include="EnumByNameSourceGenerator" Version="1.1.2" PrivateAssets="all" ExcludeAssets="runtime">
+      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <ModFiles Include="i18n/**" />
+		<ModFiles Include="assets/**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="assets\char\sierra_character_mini.png" />
+    <Content Include="assets\char\sierra_character_neutral_0.png" />
+    <Content Include="assets\char\sierra_character_panel.png" />
+    <Content Include="assets\char\sierra_card_panel.png" />
+    <Content Include="assets\combat\CheapBeer.png" />
+    <Content Include="assets\combat\MrBreaky.png" />
+    <Content Include="assets\combat\oildrum2.png" />
+    <Content Include="assets\combat\PassiveAggression.png" />
+    <Content Include="assets\combat\SlimeAndPunishment.png" />
+    <Content Include="assets\combat\SpaceJunk.png" />
+    <Content Include="assets\combat\SprayCan.png" />
+    <Content Include="assets\combat\ThickGel.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="assets\card\" />
+  </ItemGroup>
+
+</Project>

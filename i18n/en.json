@@ -1,0 +1,158 @@
+{
+  "character": {
+    "name": "Sierra",
+    "description": [
+      "<c=ffc860>SIERRA</c>",
+      "Your local arsonist and overall troublemaker. She utilizes <c=keyword>oil</c> to convert <c=downside>heat</c> into immediate damage, and loves <c=keyword>wrecking up midrow objects</c>."
+    ]
+  },
+  "status": {
+    "Oil": {
+      "name": "Oil",
+      "description": "When receiving <c=status>HEAT</c>, take equal amounts of damage instead. <c=downside>Decreases by 1 after triggering.</c>"
+    },
+    "Intimidation": {
+      "name": "Intimidation",
+      "description": "Take {0} damage when the opposing ship destroys a <c=midrow>midrow object</c>. <c=downside>Decreases by 1 after triggering</c>."
+    }
+  },
+  "card": {
+    "BarrelRoll": {
+      "name": "Barrel Roll"
+    },
+    "Mischief": {
+      "name": "Mischief"
+    },
+    "FlameDance": {
+      "name": "Flame Dance"
+    },
+    "BurnBabyBurn": {
+      "name": "Burn, Baby, Burn"
+    },
+    "BobAndWeave": {
+      "name": "Bob and Weave"
+    },
+    "Insolation": {
+      "name": "Insolation"
+    },
+    "Scorch": {
+      "name": "Scorch"
+    },
+    "DoubleBarrel": {
+      "name": "Double Barrel"
+    },
+    "Bully": {
+      "name": "Bully"
+    },
+    "PumpTheGas": {
+      "name": "Pump the Gas"
+    },
+    "Fuse": {
+      "name": "Fuse",
+      "description": {
+        "A": "Destroy a <c=midrow>midrow object</c> in front of the <c=parttrait>missile bay</c> to gain 3 <c=status>shield</c>.",
+        "B": "Destroy a <c=midrow>midrow object</c> in front of the <c=parttrait>ship</c> to gain 2 <c=status>shield</c>.",
+        "None": "Destroy a <c=midrow>midrow object</c> in front of the <c=parttrait>missile bay</c> to gain 2 <c=status>shield</c>."
+      },
+      "ui": {
+        "cancel": "CANCEL"
+      }
+    },
+    "HuckinJunk": {
+      "name": "Huckin' Junk"
+    },
+    "PartingGift": {
+      "name": "Parting Gift"
+    },
+    "BlisterBlaster": {
+      "name": "Blister Blaster"
+    },
+    "Bonk": {
+      "name": "Bonk",
+      "description": {
+        "A": "Destroy a <c=midrow>midrow object</c>. <c=cardtrait>Discounted</c> when drawn.",
+        "B": "Destroy a <c=midrow>midrow object</c>.",
+        "None": "Destroy a <c=midrow>midrow object</c>. Costs 1 more <c=energy>energy</c> this combat."
+      },
+      "ui": {
+        "cancel": "CANCEL"
+      }
+    },
+    "Sadism": {
+      "name": "Sadism"
+    },
+    "Mayhem": {
+      "name": "Mayhem"
+    },
+    "Addiction": {
+      "name": "Addiction",
+      "description": {
+        "A": "\n Gain a <c=cardtrait>discounted</c> <c=card>Booze Cruise</c>.",
+        "B": "\n Gain a <c=cardtrait>discounted</c> <c=card>Booze Cruise</c>.",
+        "None": "\n Gain a <c=cardtrait>discounted</c> <c=card>Booze Cruise</c>."
+      }
+    },
+    "HotCommodity": {
+      "name": "Hot Commodity"
+    },
+    "Cantrip": {
+      "name": "Cantrip"
+    },
+    "SingleOut": {
+      "name": "Single Out",
+      "description": {
+        "A": "Destroy a <c=midrow>midrow object</c> to gain 2 <c=status>temp shield</c>.",
+        "B": "Destroy a <c=midrow>midrow object</c> to gain 2 <c=status>temp shield</c>.",
+        "None": "Destroy a <c=midrow>midrow object</c> to gain 2 <c=status>temp shield</c>."
+      },
+      "ui": {
+        "cancel": "CANCEL"
+      }
+    },
+    "BoozeCruise": {
+      "name": "Booze Cruise"
+    }
+  },
+  "trait": {
+    "TurnEndTrigger": {
+      "name": "TURN END TRIGGER",
+      "description": "If this card is in your hand at the end of your turn, trigger the actions below the line."
+    }
+  },
+  "midrow": {
+    "OilDrum": {
+      "name": "OIL DRUM",
+      "description": "Destroying this will apply 1 <c=status>OIL</c> to its' destroyer."
+    }
+  },
+  "artifact": {
+    "CheapBeer": {
+      "name": "CHEAP BEER",
+      "description": "Gain 2 <c=energy>ENERGY</c> whenever you destroy a <c=midrow>midrow object</c>. <c=downside>Every turn, if you have less than 4 <c=status>INTIMIDATION</c>, gain 1 <c=status>INTIMIDATION</c></c>."
+    },
+    "PassiveAggression": {
+      "name": "PASSIVE AGGRESSION",
+      "description": "Apply 1 <c=status>INTIMIDATION</c> to the enemy every turn. <c=downside>Your attacks deal 1 less damage.</c>"
+    },
+    "SprayCan": {
+      "name": "SPRAY CAN",
+      "description": "Increase <c=status>HEAT</c> applied to the enemy by 1."
+    },
+    "SlimeAndPunishment": {
+      "name": "SLIME & PUNISHMENT",
+      "description": "Whenever you gain <c=status>OIL</c> or destroy a <c=midrow>midrow object</c>, gain 1 <c=status>TEMP SHIELD</c>."
+    },
+    "ThickGel": {
+      "name": "THICK GEL",
+      "description": "Every turn, if you have 2 or more <c=status>OIL</c>, lose 1 <c=status>HEAT</c>."
+    },
+    "SpaceJunk": {
+      "name": "SPACE JUNK",
+      "description": "2 <c=midrow>oil drums</c> will always be near your ship at the start of combat."
+    },
+    "MrBreaky": {
+      "name": "MR. BREAKY",
+      "description": "Each combat, gain a <c=cardtrait>temporary</c> <c=card>Bonk</c>."
+    }
+  }
+}
