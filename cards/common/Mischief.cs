@@ -36,7 +36,8 @@ internal sealed class MischiefCard : Card, IRegisterable, IHasCustomCardTraits
     public override CardData GetData(State state)
         => upgrade switch
         {
-            _ => new() { cost = 1 },
+            Upgrade.A => new() { cost = 1, art = ModEntry.Instance.EndTrigger2.Sprite },
+            _ => new() { cost = 1 }
         };
     public override List<CardAction> GetActions(State s, Combat c)
         => upgrade switch

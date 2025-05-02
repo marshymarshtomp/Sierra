@@ -24,16 +24,15 @@ internal sealed class PumpTheGasCard : Card, IRegisterable
                 rarity = Rarity.uncommon,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocs.Bind(["card", "PumpTheGas", "name"]).Localize,
-            Art = ModEntry.Instance.Helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/card/PumpTheGas.png")).Sprite
+            Name = ModEntry.Instance.AnyLocs.Bind(["card", "PumpTheGas", "name"]).Localize
         });
     }
 
     public override CardData GetData(State state)
         => upgrade switch
         {
-            Upgrade.A => new() { cost = 1, flippable = true },
-            _ => new() { cost = 1 }
+            Upgrade.A => new() { cost = 1, flippable = true, art = flipped ? ModEntry.Instance.PumpTheGasFlipped.Sprite : ModEntry.Instance.PumpTheGas.Sprite },
+            _ => new() { cost = 1, art = flipped ? ModEntry.Instance.PumpTheGasFlipped.Sprite : ModEntry.Instance.PumpTheGas.Sprite }
         };
     public override List<CardAction> GetActions(State s, Combat c)
         => upgrade switch

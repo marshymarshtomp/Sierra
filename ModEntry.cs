@@ -94,6 +94,8 @@ public sealed class ModEntry: SimpleMod
     internal ISpriteEntry EndTrigger1 { get; }
     internal ISpriteEntry EndTrigger2 { get; }
     internal ISpriteEntry EndTrigger3 { get; }
+    internal ISpriteEntry PumpTheGas { get; }
+    internal ISpriteEntry PumpTheGasFlipped { get; }
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
     {
         Instance = this;
@@ -114,6 +116,8 @@ public sealed class ModEntry: SimpleMod
         EndTrigger1 = ModEntry.Instance.Helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/card/EndTrigger1.png"));
         EndTrigger2 = ModEntry.Instance.Helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/card/EndTrigger2.png"));
         EndTrigger3 = ModEntry.Instance.Helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/card/EndTrigger3.png"));
+        PumpTheGas = Instance.Helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/card/PumpTheGas.png"));
+        PumpTheGasFlipped = Instance.Helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/card/PumpTheGasFlip.png"));
 
         SierraDeck = helper.Content.Decks.RegisterDeck("Sierra", new()
         {
