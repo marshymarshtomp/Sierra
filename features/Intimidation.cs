@@ -34,11 +34,6 @@ internal sealed class IntimidationManager : IRegisterable
                 original: AccessTools.DeclaredMethod(typeof(Combat), nameof(Combat.DestroyDroneAt)),
                 prefix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(Combat_DestroyDroneAt_Prefix))
             );
-        ModEntry.Instance.Harmony.Patch(
-                original: AccessTools.DeclaredMethod(typeof(AAttack), nameof(AAttack.Begin)),
-                prefix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(AAttack_Begin_Prefix)),
-                finalizer: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(AAttack_Begin_Finalizer))
-            );
        /*ModEntry.Instance.Harmony.Patch(
                 original: AccessTools.DeclaredMethod(typeof(Combat), nameof(Combat.DestroyDroneAt)),
                 prefix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(Combat_DestroyDroneAt_Prefix))
@@ -79,10 +74,11 @@ internal sealed class IntimidationManager : IRegisterable
     {
         if (s.route is Combat c)
         {
-
+            var currStuff = c.stuff.GetValueOrDefault(x);
             var shipToTarget = playerDidIt ? c.otherShip : s.ship;
+            if (currStuff is null) return;
             if (shipToTarget.Get(IntimidationStatus.Status) <= 0) return;
-            if (c.stuff.GetValueOrDefault(x).age == 0) return;
+            if (currStuff.age == 0) return;
             c.Queue(new AHurt()
             {
                 targetPlayer = !playerDidIt,
@@ -92,6 +88,4 @@ internal sealed class IntimidationManager : IRegisterable
             shipToTarget.Set(IntimidationStatus.Status, shipToTarget.Get(IntimidationStatus.Status) - 1);
         }
     }
-    private static void AAttack_Begin_Prefix() => fromAAttack = true;
-    private static void AAttack_Begin_Finalizer() => fromAAttack = false;
 }
