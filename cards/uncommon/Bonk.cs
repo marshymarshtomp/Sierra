@@ -14,6 +14,7 @@ namespace Sierra.cards.uncommon;
 
 internal sealed class BonkCard : Card, IRegisterable
 {
+    public int permDiscount = 0;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(MethodBase.GetCurrentMethod()!.DeclaringType!.Name, new()
@@ -35,7 +36,7 @@ internal sealed class BonkCard : Card, IRegisterable
         {
             Upgrade.A => new() { cost = 1, infinite = true, retain = true, description = ModEntry.Instance.Locs.Localize(["card", "Bonk", "description", upgrade.ToString()]) },
             Upgrade.B => new() { cost = 0, retain = true, description = ModEntry.Instance.Locs.Localize(["card", "Bonk", "description", upgrade.ToString()]) },
-            _ => new() { cost = 0, infinite = true, retain = true, description = ModEntry.Instance.Locs.Localize(["card", "Bonk", "description", upgrade.ToString()]) },
+            _ => new() { cost = 0, infinite = true, retain = true, description = ModEntry.Instance.Locs.Localize(["card", "Bonk", "description", upgrade.ToString()]),  },
         };
     public override List<CardAction> GetActions(State s, Combat c)
         => upgrade switch
@@ -44,7 +45,7 @@ internal sealed class BonkCard : Card, IRegisterable
                 new PickMidrowToDestroyAction()
                 {
                     currCard = this,
-                    currUpg = upgrade
+                    currUpg = upgrade,
                 }
             ],
         };
@@ -54,5 +55,13 @@ internal sealed class BonkCard : Card, IRegisterable
         {
             this.discount -= 1;
         }
+    }
+    public override void AfterWasPlayed(State state, Combat c)
+    {
+        if (upgrade == Upgrade.None) { permDiscount+=1; discount = permDiscount; }
+    }
+    public override void OnExitCombat(State s, Combat c)
+    {
+        permDiscount = 0;
     }
 }

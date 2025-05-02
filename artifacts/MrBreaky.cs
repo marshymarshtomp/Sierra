@@ -40,4 +40,6 @@ internal sealed class MrBreaky : Artifact
             destination = CardDestination.Hand
         });
     }
+    public override List<Tooltip>? GetExtraTooltips()
+        => [new TTCard() { card = new BonkCard() }];
 }

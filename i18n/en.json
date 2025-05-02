@@ -70,7 +70,7 @@
     "Bonk": {
       "name": "Bonk",
       "description": {
-        "A": "Destroy a <c=midrow>midrow object</c>. <c=cardtrait>Discounted</c> when drawn.",
+        "A": "Destroy a <c=midrow>midrow object</c>. \n<c=cardtrait>Discounted</c> when drawn.",
         "B": "Destroy a <c=midrow>midrow object</c>.",
         "None": "Destroy a <c=midrow>midrow object</c>. Costs 1 more <c=energy>energy</c> this combat."
       },

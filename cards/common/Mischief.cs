@@ -96,6 +96,7 @@ internal sealed class MischiefCard : Card, IRegisterable, IHasCustomCardTraits
                             targetPlayer = true
                         }
                     ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
+                
             ],
 
         };

@@ -51,9 +51,9 @@ internal sealed class AddictionCard : Card, IRegisterable, IHasCustomCardTraits
                         card = new BoozeCruiseCard()
                         {
                             discount = -1
-                        }
+                        },
+                        destination = CardDestination.Hand
                     }).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
             ],
-
         };
 }
