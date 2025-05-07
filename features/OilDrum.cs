@@ -24,7 +24,8 @@ public class OilDrum : StuffBase
                 TitleColor = Colors.midrow,
                 Title = ModEntry.Instance.Locs.Localize(["midrow", "OilDrum", "name"]),
                 Description = ModEntry.Instance.Locs.Localize(["midrow", "OilDrum", "description"])
-            }
+            },
+            .. StatusMeta.GetTooltips(OilManager.OilStatus.Status, 1)
             ];
     }
     public override List<CardAction>? GetActionsOnDestroyed(State s, Combat c, bool wasPlayer, int worldX)

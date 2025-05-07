@@ -29,6 +29,19 @@ internal sealed class SpaceJunk : Artifact
             Description = ModEntry.Instance.AnyLocs.Bind(["artifact", "SpaceJunk", "description"]).Localize
         });
     }
+    public override List<Tooltip>? GetExtraTooltips()
+    {
+        return [
+            new GlossaryTooltip($"midrow.{ModEntry.Instance.Package.Manifest.UniqueName}::OilDrum")
+            {
+                Icon = ModEntry.Instance.oilDrumIcon.Sprite,
+                TitleColor = Colors.midrow,
+                Title = ModEntry.Instance.Locs.Localize(["midrow", "OilDrum", "name"]),
+                Description = ModEntry.Instance.Locs.Localize(["midrow", "OilDrum", "description"])
+            },
+            .. StatusMeta.GetTooltips(OilManager.OilStatus.Status, 1)
+            ];
+    }
     public override void OnCombatStart(State state, Combat combat)
     {
         List<int> validSpaces = new List<int>();

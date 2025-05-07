@@ -11,7 +11,7 @@ using Sierra;
 
 namespace Sierra.cards.common;
 
-internal sealed class ScorchCard : Card, IRegisterable
+internal sealed class MayhemCard : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -24,7 +24,7 @@ internal sealed class ScorchCard : Card, IRegisterable
                 rarity = Rarity.common,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocs.Bind(["card", "Scorch", "name"]).Localize,
+            Name = ModEntry.Instance.AnyLocs.Bind(["card", "Mayhem", "name"]).Localize,
             Art = ModEntry.Instance.Helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/card/Scorch.png")).Sprite
         });
     }
@@ -32,35 +32,44 @@ internal sealed class ScorchCard : Card, IRegisterable
     public override CardData GetData(State state)
         => upgrade switch
         {
-            _ => new() { cost = 1 },
+            Upgrade.A => new() { cost = 1, infinite = true },
+            _ => new() { cost = 2 },
         };
     public override List<CardAction> GetActions(State s, Combat c)
         => upgrade switch
         {
             Upgrade.A => [
-                new AAttack()
+                new AStatus()
                 {
-                    damage = GetDmg(s, 0),
-                    status = Status.heat,
-                    statusAmount = 3
+                    status = Status.shield,
+                    targetPlayer = true,
+                    statusAmount = 1
                 },
                 new AAttack()
                 {
                     damage = GetDmg(s, 0),
                     status = Status.heat,
-                    statusAmount = 3
+                    statusAmount = 2
                 }
             ],
             Upgrade.B => [
-                new AAttack()
+                new AStatus()
                 {
-                    damage = GetDmg(s, 1)
+                    status = Status.shield,
+                    targetPlayer = true,
+                    statusAmount = 3
                 },
                 new AAttack()
                 {
                     damage = GetDmg(s, 1),
                     status = Status.heat,
-                    statusAmount = 4
+                    statusAmount = 2
+                },
+                new AAttack()
+                {
+                    damage = GetDmg(s, 1),
+                    status = Status.heat,
+                    statusAmount = 2
                 },
                 new AStatus()
                 {
@@ -70,6 +79,12 @@ internal sealed class ScorchCard : Card, IRegisterable
                 }
             ],
             _ => [
+                new AStatus()
+                {
+                    status = Status.shield,
+                    targetPlayer = true,
+                    statusAmount = 2
+                },
                 new AAttack()
                 {
                     damage = GetDmg(s, 0),

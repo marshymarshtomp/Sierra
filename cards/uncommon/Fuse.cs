@@ -33,20 +33,13 @@ internal sealed class FuseCard : Card, IRegisterable
     public override CardData GetData(State state)
         => upgrade switch
         {
-            Upgrade.A => new() { cost = 1, description = ModEntry.Instance.Locs.Localize(["card", "Fuse", "description", upgrade.ToString()]) },
+            Upgrade.A => new() { cost = 1, retain = true, description = ModEntry.Instance.Locs.Localize(["card", "Fuse", "description", upgrade.ToString()]) },
             Upgrade.B => new() { cost = 1, description = ModEntry.Instance.Locs.Localize(["card", "Fuse", "description", upgrade.ToString()]) },
             _ => new() { cost = 1, description = ModEntry.Instance.Locs.Localize(["card", "Fuse", "description", upgrade.ToString()]) },
         };
     public override List<CardAction> GetActions(State s, Combat c)
         => upgrade switch
         {
-            Upgrade.B => [
-                new PickMidrowToDestroyAction()
-                {
-                    currCard = this,
-                    currUpg = upgrade
-                }
-            ],
             _ => [
                 new PickMidrowToDestroyAction()
                 {

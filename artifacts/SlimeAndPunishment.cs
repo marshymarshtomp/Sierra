@@ -34,6 +34,13 @@ internal sealed class SlimeAndPunishment : Artifact
             postfix: new HarmonyMethod(AccessTools.DeclaredMethod(MethodBase.GetCurrentMethod()!.DeclaringType, nameof(Combat_DestroyDroneAt_Postfix)))
         );
     }
+    public override List<Tooltip>? GetExtraTooltips()
+    {
+        return [
+            .. StatusMeta.GetTooltips(OilManager.OilStatus.Status, 1),
+            .. StatusMeta.GetTooltips(Status.tempShield, 1)
+            ];
+    }
     private static void Combat_DestroyDroneAt_Postfix(State s, int x, bool playerDidIt)
     {
         if (s.route is Combat c)

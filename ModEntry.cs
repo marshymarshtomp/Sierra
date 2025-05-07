@@ -39,12 +39,13 @@ public sealed class ModEntry: SimpleMod
             typeof(DoubleBarrelCard),
             typeof(FlameDanceCard),
             typeof(InsolationCard),
-            typeof(ScorchCard),
-            typeof(BoozeCruiseCard)
+            typeof(MayhemCard),
+            typeof(BoozeCruiseCard),
+            typeof(BonkCard)
         ];
     internal static readonly IReadOnlyList<Type> UncommonCardTypes = [
             typeof(BlisterBlasterCard),
-            typeof(BonkCard),
+            typeof(HammerlockCard),
             typeof(FuseCard),
             typeof(HuckinJunkCard),
             typeof(PartingGiftCard),
@@ -52,11 +53,11 @@ public sealed class ModEntry: SimpleMod
             typeof(SadismCard)
         ];
     internal static readonly IReadOnlyList<Type> RareCardTypes = [
-            typeof(SingleOutCard),
+            typeof(DominateCard),
             typeof(AddictionCard),
             typeof(CantripCard),
             typeof(HotCommodityCard),
-            typeof(MayhemCard)
+            typeof(WildfireCard)
         ];
     internal static readonly IEnumerable<Type> AllCardTypes = 
         [
@@ -158,6 +159,15 @@ public sealed class ModEntry: SimpleMod
                         new MischiefCard()
                     ]
             }
+        });
+
+        helper.Content.Characters.V2.RegisterCharacterAnimation(new()
+        {
+            CharacterType = SierraDeck.UniqueName,
+            LoopTag = "gameover",
+            Frames = [
+                helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/char/sierra_character_neutral_0.png")).Sprite
+                ]
         });
 
         helper.ModRegistry.AwaitApi<IMoreDifficultiesApi>(

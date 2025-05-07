@@ -34,7 +34,12 @@ internal sealed class CheapBeer : Artifact
                 postfix: new HarmonyMethod(AccessTools.DeclaredMethod(MethodBase.GetCurrentMethod()!.DeclaringType, nameof(Combat_DestroyDroneAt_Postfix)))
                 );
     }
-
+    public override List<Tooltip>? GetExtraTooltips()
+    {
+        return [
+            .. StatusMeta.GetTooltips(IntimidationManager.IntimidationStatus.Status, 1)
+            ];
+    }
     private static void Combat_DestroyDroneAt_Postfix(State s, int x, bool playerDidIt)
     {
         if (s.route is Combat c)

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using Sierra.cards.special;
 
 namespace Sierra.features
 {
@@ -54,18 +55,6 @@ namespace Sierra.features
                 {
                     if (Math.Abs(worldX - centerX) > 10) continue;
                     if (g.boxes.FirstOrDefault(b => b.key is { } key && key.k == StableUK.midrow && key.v == worldX) is not { } realBox) continue;
-                    if (currCard2 is FuseCard)
-                    {
-                        var truth = false;
-                        for(var i = 0; i < g.state.ship.parts.Count; i++)
-                        {
-                            if (currUpg2 is Upgrade.B && @object.x == g.state.ship.x + i) { truth = true; break; };
-                            if (g.state.ship.parts[i].type == PType.missiles && @object.x == g.state.ship.x + i) { truth = true; break; }
-                        }
-                        if (!truth) { continue; }
-                    }
-
-
                     var box = g.Push(new global::UIKey(MidrowExecutionUK, worldX), realBox.rect, onMouseDown: new MouseDownHandler(() => OnMidrowSelected(g, @object)));
                     @object.Render(g, box.rect.xy);
                     if (box.rect.x is > 60 and < 464.0 && box.IsHover())
@@ -83,9 +72,6 @@ namespace Sierra.features
                 var cardName = "";
                 switch(currCard2)
                 {
-                    case SingleOutCard:
-                        cardName = "SingleOut";
-                        break;
                     case BonkCard:
                         cardName = "Bonk";
                         break;
@@ -114,27 +100,19 @@ namespace Sierra.features
                 }
 
                 combat.DestroyDroneAt(g.state, @object.x, true);
+
                 switch (currCard2)
                 {
-                    case SingleOutCard:
-                        switch (currUpg2)
-                        {
-                            case Upgrade.A:
-                                Audio.Play(FSPRO.Event.Drones_MissileLaunch);
-                                combat.Queue(new AStatus() { status = Status.tempShield, statusAmount = 3, targetPlayer = true });
-                                break;
-                            default:
-                                Audio.Play(FSPRO.Event.Drones_MissileLaunch);
-                                combat.Queue(new AStatus() { status = Status.tempShield, statusAmount = 2, targetPlayer = true });
-                                break;
-                        }
-                        break;
                     case BonkCard:
+                        if (currUpg2 is Upgrade.A)
+                        {
+                            combat.Queue(new AStatus() { status = Status.tempShield, statusAmount = 2, targetPlayer = true });
+                        }
                         Audio.Play(FSPRO.Event.Drones_MissileLaunch);
                         break;
                     case FuseCard:
                         Audio.Play(FSPRO.Event.Drones_MissileLaunch);
-                        combat.Queue(new AStatus() { status = Status.shield, statusAmount = currUpg2 == Upgrade.A ? 3 : 2, targetPlayer = true });
+                        combat.Queue(new AStatus() { status = Status.shield, statusAmount = currUpg2 == Upgrade.B ? 3 : 2, targetPlayer = true });
                         break;
                     default:
                         break;

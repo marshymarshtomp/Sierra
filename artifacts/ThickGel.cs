@@ -29,6 +29,13 @@ internal sealed class ThickGel : Artifact
             Description = ModEntry.Instance.AnyLocs.Bind(["artifact", "ThickGel", "description"]).Localize
         });
     }
+    public override List<Tooltip>? GetExtraTooltips()
+    {
+        return [
+            .. StatusMeta.GetTooltips(OilManager.OilStatus.Status, 1),
+            .. StatusMeta.GetTooltips(Status.heat, 1)
+            ];
+    }
     public override void OnTurnStart(State state, Combat combat)
     {
         if (state.ship.Get(OilManager.OilStatus.Status) >= 2)

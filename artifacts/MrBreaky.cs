@@ -1,6 +1,8 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
+using Sierra.cards.special;
 using Sierra.cards.uncommon;
+using Sierra.features;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +31,12 @@ internal sealed class MrBreaky : Artifact
             Description = ModEntry.Instance.AnyLocs.Bind(["artifact", "MrBreaky", "description"]).Localize
         });
     }
+    public override List<Tooltip>? GetExtraTooltips()
+    {
+        return [
+            new TTCard() { card = new BonkCard() }
+            ];
+    }
     public override void OnCombatStart(State state, Combat combat)
     {
         combat.Queue(new AAddCard()
@@ -40,6 +48,4 @@ internal sealed class MrBreaky : Artifact
             destination = CardDestination.Hand
         });
     }
-    public override List<Tooltip>? GetExtraTooltips()
-        => [new TTCard() { card = new BonkCard() }];
 }

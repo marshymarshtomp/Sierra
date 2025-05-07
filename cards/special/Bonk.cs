@@ -7,10 +7,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Sierra.features;
-using Sierra;
 using static Sierra.features.PickDestroyMidrow;
 
-namespace Sierra.cards.uncommon;
+namespace Sierra.cards.special;
 
 internal sealed class BonkCard : Card, IRegisterable
 {
@@ -23,8 +22,9 @@ internal sealed class BonkCard : Card, IRegisterable
             Meta = new()
             {
                 deck = ModEntry.Instance.SierraDeck.Deck,
-                rarity = Rarity.uncommon,
-                upgradesTo = [Upgrade.A, Upgrade.B]
+                rarity = Rarity.common,
+                upgradesTo = [Upgrade.A, Upgrade.B],
+                dontOffer = true
             },
             Name = ModEntry.Instance.AnyLocs.Bind(["card", "Bonk", "name"]).Localize,
             Art = ModEntry.Instance.Helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/card/Bonk.png")).Sprite
@@ -34,9 +34,9 @@ internal sealed class BonkCard : Card, IRegisterable
     public override CardData GetData(State state)
         => upgrade switch
         {
-            Upgrade.A => new() { cost = 1, infinite = true, retain = true, description = ModEntry.Instance.Locs.Localize(["card", "Bonk", "description", upgrade.ToString()]) },
-            Upgrade.B => new() { cost = 0, retain = true, description = ModEntry.Instance.Locs.Localize(["card", "Bonk", "description", upgrade.ToString()]) },
-            _ => new() { cost = 0, infinite = true, retain = true, description = ModEntry.Instance.Locs.Localize(["card", "Bonk", "description", upgrade.ToString()]),  },
+            Upgrade.A => new() { cost = 0, retain = true, temporary = true, exhaust = true, description = ModEntry.Instance.Locs.Localize(["card", "Bonk", "description", upgrade.ToString()]) },
+            Upgrade.B => new() { cost = 0, retain = true, temporary = true, description = ModEntry.Instance.Locs.Localize(["card", "Bonk", "description", upgrade.ToString()]) },
+            _ => new() { cost = 0, retain = true, temporary = true, exhaust = true, description = ModEntry.Instance.Locs.Localize(["card", "Bonk", "description", upgrade.ToString()]), },
         };
     public override List<CardAction> GetActions(State s, Combat c)
         => upgrade switch
@@ -47,21 +47,6 @@ internal sealed class BonkCard : Card, IRegisterable
                     currCard = this,
                     currUpg = upgrade,
                 }
-            ],
+            ]
         };
-    public override void OnDraw(State s, Combat c)
-    {
-        if (this.upgrade == Upgrade.A)
-        {
-            this.discount -= 1;
-        }
-    }
-    public override void AfterWasPlayed(State state, Combat c)
-    {
-        if (upgrade == Upgrade.None) { permDiscount+=1; discount = permDiscount; }
-    }
-    public override void OnExitCombat(State s, Combat c)
-    {
-        permDiscount = 0;
-    }
 }

@@ -35,8 +35,8 @@
     "Insolation": {
       "name": "Insolation"
     },
-    "Scorch": {
-      "name": "Scorch"
+    "Mayhem": {
+      "name": "Mayhem"
     },
     "DoubleBarrel": {
       "name": "Double Barrel"
@@ -50,9 +50,9 @@
     "Fuse": {
       "name": "Fuse",
       "description": {
-        "A": "Destroy a <c=midrow>midrow object</c> in front of the <c=parttrait>missile bay</c> to gain 3 <c=status>shield</c>.",
-        "B": "Destroy a <c=midrow>midrow object</c> in front of the <c=parttrait>ship</c> to gain 2 <c=status>shield</c>.",
-        "None": "Destroy a <c=midrow>midrow object</c> in front of the <c=parttrait>missile bay</c> to gain 2 <c=status>shield</c>."
+        "A": "Destroy a <c=midrow>midrow object</c> to gain 2 <c=status>shield</c>.",
+        "B": "Destroy a <c=midrow>midrow object</c> to gain 3 <c=status>shield</c>.",
+        "None": "Destroy a <c=midrow>midrow object</c> to gain 2 <c=status>shield</c>."
       },
       "ui": {
         "cancel": "CANCEL"
@@ -70,9 +70,9 @@
     "Bonk": {
       "name": "Bonk",
       "description": {
-        "A": "Destroy a <c=midrow>midrow object</c>. \n<c=cardtrait>Discounted</c> when drawn.",
+        "A": "Destroy a <c=midrow>midrow object</c> to gain 2 <c=status>temp shield</c>.",
         "B": "Destroy a <c=midrow>midrow object</c>.",
-        "None": "Destroy a <c=midrow>midrow object</c>. Costs 1 more <c=energy>energy</c> this combat."
+        "None": "Destroy a <c=midrow>midrow object</c>."
       },
       "ui": {
         "cancel": "CANCEL"
@@ -81,8 +81,8 @@
     "Sadism": {
       "name": "Sadism"
     },
-    "Mayhem": {
-      "name": "Mayhem"
+    "Wildfire": {
+      "name": "Wildfire"
     },
     "Addiction": {
       "name": "Addiction",
@@ -98,19 +98,24 @@
     "Cantrip": {
       "name": "Cantrip"
     },
-    "SingleOut": {
-      "name": "Single Out",
-      "description": {
-        "A": "Destroy a <c=midrow>midrow object</c> to gain 2 <c=status>temp shield</c>.",
-        "B": "Destroy a <c=midrow>midrow object</c> to gain 2 <c=status>temp shield</c>.",
-        "None": "Destroy a <c=midrow>midrow object</c> to gain 2 <c=status>temp shield</c>."
-      },
-      "ui": {
-        "cancel": "CANCEL"
-      }
-    },
     "BoozeCruise": {
       "name": "Booze Cruise"
+    },
+    "Dominate": {
+      "name": "Dominate",
+      "description": {
+        "A": "Destroy all <c=midrow>midrow objects</c>.",
+        "B": "Draw 1 card. Destroy all <c=midrow>midrow objects</c>.",
+        "None": "Destroy all <c=midrow>midrow objects</c>."
+      }
+    },
+    "Hammerlock": {
+      "name": "Hammerlock",
+      "description": {
+        "A": "Add two <c=card>Bonks</c> into your <c=white>hand</c>.",
+        "B": "Add a <c=card>Bonk B</c> into your <c=white>hand</c>.",
+        "None": "Add a <c=card>Bonk</c> into your <c=white>hand</c>."
+      }
     }
   },
   "trait": {

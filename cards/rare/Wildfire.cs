@@ -11,7 +11,7 @@ using Sierra;
 
 namespace Sierra.cards.rare;
 
-internal sealed class MayhemCard : Card, IRegisterable, IHasCustomCardTraits
+internal sealed class WildfireCard : Card, IRegisterable, IHasCustomCardTraits
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -24,7 +24,7 @@ internal sealed class MayhemCard : Card, IRegisterable, IHasCustomCardTraits
                 rarity = Rarity.rare,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocs.Bind(["card", "Mayhem", "name"]).Localize,
+            Name = ModEntry.Instance.AnyLocs.Bind(["card", "Wildfire", "name"]).Localize,
             Art = ModEntry.Instance.EndTrigger3.Sprite
         });
     }
@@ -45,11 +45,11 @@ internal sealed class MayhemCard : Card, IRegisterable, IHasCustomCardTraits
             Upgrade.B => [
                 new ADummyAction(),
                 ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
-                    new AAttack()
+                    new AStatus()
                     {
-                        piercing = true,
-                        targetPlayer = false,
-                        damage = GetDmg(s, 4)
+                        status = Status.tempShield,
+                        targetPlayer = true,
+                        statusAmount = 5
                     }).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction,
                 ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
                     new AStatus()
@@ -62,11 +62,11 @@ internal sealed class MayhemCard : Card, IRegisterable, IHasCustomCardTraits
             _ => [
                 new ADummyAction(),
                 ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
-                    new AAttack()
+                    new AStatus()
                     {
-                        piercing = true,
-                        targetPlayer = false,
-                        damage = GetDmg(s, 3)
+                        status = Status.tempShield,
+                        targetPlayer = true,
+                        statusAmount = 4
                     }).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction,
                 ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
                     new AStatus()

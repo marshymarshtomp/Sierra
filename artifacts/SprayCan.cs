@@ -1,6 +1,7 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
 using Sierra.ExternalAPIs.Kokoro;
+using Sierra.features;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,13 @@ internal sealed class SprayCan : Artifact
             Description = ModEntry.Instance.AnyLocs.Bind(["artifact", "SprayCan", "description"]).Localize
         });
         ModEntry.Instance.KokoroApi.StatusLogic.RegisterHook(new LogicHook());
+    }
+
+    public override List<Tooltip>? GetExtraTooltips()
+    {
+        return [
+            .. StatusMeta.GetTooltips(Status.heat, 1),
+            ];
     }
     public sealed class LogicHook : IKokoroApi.IV2.IStatusLogicApi.IHook
     {

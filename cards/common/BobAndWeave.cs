@@ -60,7 +60,7 @@ internal sealed class BobAndWeaveCard : Card, IRegisterable, IHasCustomCardTrait
                             dir = -2,
                             targetPlayer = true
                         }
-                    ).AsCardAction,
+                    ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction,
                 ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
                         new AStatus()
                         {

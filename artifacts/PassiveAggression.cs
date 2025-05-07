@@ -34,6 +34,12 @@ internal sealed class PassiveAggression : Artifact
         postfix: new HarmonyMethod(AccessTools.DeclaredMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(Card_GetActionsOverridden_Postfix)), priority: Priority.Normal)
         );
     }
+    public override List<Tooltip>? GetExtraTooltips()
+    {
+        return [
+            .. StatusMeta.GetTooltips(IntimidationManager.IntimidationStatus.Status, 1)
+            ];
+    }
     private static void Card_GetActionsOverridden_Postfix(State s, ref List<CardAction> __result, Card __instance)
     {
         var card = __instance;
