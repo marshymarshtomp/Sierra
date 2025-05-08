@@ -40,29 +40,9 @@ internal sealed class InsolationCard : Card, IRegisterable
             Upgrade.A => [
                 new AStatus()
                 {
-                    status = Status.shield,
-                    targetPlayer = true,
-                    statusAmount = 2
-                },
-                new AStatus()
-                {
                     status = Status.tempShield,
                     targetPlayer = true,
-                    statusAmount = 1
-                },
-                new AStatus()
-                {
-                    status = OilManager.OilStatus.Status,
-                    statusAmount = 1,
-                    targetPlayer = true
-                }
-            ],
-            Upgrade.B => [
-                 new AStatus()
-                {
-                    status = Status.shield,
-                    targetPlayer = true,
-                    statusAmount = 2
+                    statusAmount = 3
                 },
                 new AStatus()
                 {
@@ -77,12 +57,26 @@ internal sealed class InsolationCard : Card, IRegisterable
                     targetPlayer = false
                 }
             ],
+            Upgrade.B => [
+                new AStatus()
+                {
+                    status = Status.tempShield,
+                    targetPlayer = true,
+                    statusAmount = 3
+                },
+                new AStatus()
+                {
+                    status = OilManager.OilStatus.Status,
+                    statusAmount = 2,
+                    targetPlayer = true
+                }
+            ],
             _ => [
                 new AStatus()
                 {
-                    status = Status.shield,
+                    status = Status.tempShield,
                     targetPlayer = true,
-                    statusAmount = 2
+                    statusAmount = 3
                 },
                 new AStatus()
                 {

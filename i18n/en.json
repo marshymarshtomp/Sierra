@@ -13,7 +13,7 @@
     },
     "Intimidation": {
       "name": "Intimidation",
-      "description": "Take {0} damage when the opposing ship destroys a <c=midrow>midrow object</c>. <c=downside>Decreases by 1 after triggering</c>."
+      "description": "Take {0} damage when the opposing ship destroys a <c=midrow>midrow object</c>. <c=downside>Decreases by 1 after triggering.</c>"
     }
   },
   "card": {
@@ -112,9 +112,9 @@
     "Hammerlock": {
       "name": "Hammerlock",
       "description": {
-        "A": "Add two <c=card>Bonks</c> into your <c=white>hand</c>.",
-        "B": "Add a <c=card>Bonk B</c> into your <c=white>hand</c>.",
-        "None": "Add a <c=card>Bonk</c> into your <c=white>hand</c>."
+        "A": "Add 2 <c=card>Bonks</c> into your <c=keyword>hand</c>.",
+        "B": "Add a <c=card>Bonk B</c> into your <c=keyword>hand</c>.",
+        "None": "Add a <c=card>Bonk</c> into your <c=keyword>hand</c>."
       }
     }
   },
@@ -157,7 +157,7 @@
     },
     "MrBreaky": {
       "name": "MR. BREAKY",
-      "description": "Each combat, gain a <c=cardtrait>temporary</c> <c=card>Bonk</c>."
+      "description": "Each combat, gain 2 <c=card>Bonks</c>."
     }
   }
 }

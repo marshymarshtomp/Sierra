@@ -21,7 +21,7 @@ internal sealed class SadismCard : Card, IRegisterable
             Meta = new()
             {
                 deck = ModEntry.Instance.SierraDeck.Deck,
-                rarity = Rarity.common,
+                rarity = Rarity.uncommon,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocs.Bind(["card", "Sadism", "name"]).Localize,

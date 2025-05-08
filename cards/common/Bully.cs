@@ -49,8 +49,8 @@ internal sealed class BullyCard : Card, IRegisterable
                 new AAttack()
                 {
                     status = IntimidationManager.IntimidationStatus.Status,
-                    statusAmount = 2,
-                    damage = GetDmg(s, 2)
+                    statusAmount = 3,
+                    damage = GetDmg(s, 0)
                 },
                 new AStatus()
                 {

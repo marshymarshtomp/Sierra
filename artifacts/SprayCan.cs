@@ -1,4 +1,5 @@
-﻿using Nanoray.PluginManager;
+﻿using HarmonyLib;
+using Nanoray.PluginManager;
 using Nickel;
 using Sierra.ExternalAPIs.Kokoro;
 using Sierra.features;
@@ -8,8 +9,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using static Sierra.artifacts.SprayCan;
-using static Sierra.ExternalAPIs.Kokoro.IKokoroApi.IV2.IStatusLogicApi.IHook;
 
 namespace Sierra.artifacts;
 
@@ -31,7 +30,10 @@ internal sealed class SprayCan : Artifact
             Name = ModEntry.Instance.AnyLocs.Bind(["artifact", "SprayCan", "name"]).Localize,
             Description = ModEntry.Instance.AnyLocs.Bind(["artifact", "SprayCan", "description"]).Localize
         });
-        ModEntry.Instance.KokoroApi.StatusLogic.RegisterHook(new LogicHook());
+        ModEntry.Instance.Harmony.Patch(
+            original: AccessTools.DeclaredMethod(typeof(Card), nameof(Card.GetActionsOverridden)),
+            postfix: new HarmonyMethod(AccessTools.DeclaredMethod(MethodBase.GetCurrentMethod()!.DeclaringType, nameof(Card_GetActionsOverridden_Postfix)))
+        );
     }
 
     public override List<Tooltip>? GetExtraTooltips()
@@ -40,18 +42,29 @@ internal sealed class SprayCan : Artifact
             .. StatusMeta.GetTooltips(Status.heat, 1),
             ];
     }
-    public sealed class LogicHook : IKokoroApi.IV2.IStatusLogicApi.IHook
+    private static void Card_GetActionsOverridden_Postfix(State s, ref List<CardAction> __result, Card __instance)
     {
-        public int ModifyStatusChange(IModifyStatusChangeArgs args)
+        var card = __instance;
+        if (s.EnumerateAllArtifacts().FirstOrDefault(a => a is SprayCan) is not { } artifact) return;
+        if (s.route is Combat c)
         {
-            if (args.Status == Status.heat)
+            if (s.deck.Contains(card) || c.discard.Contains(card) || c.exhausted.Contains(card) || c.hand.Contains(card))
             {
-                if (args.State.EnumerateAllArtifacts().FirstOrDefault(a => a is SprayCan) is { } Artifact)
+                foreach (var actions in __result)
                 {
-                    if (args.Ship == args.Combat.otherShip) return args.NewAmount + 1;
+                    foreach (var unwrappedAction in ModEntry.Instance.KokoroApi.WrappedActions.GetWrappedCardActionsRecursively(actions))
+                    {
+                        if (unwrappedAction is AAttack attack)
+                        {
+                            if (attack.status == Status.heat && attack.targetPlayer == false) attack.statusAmount += 1;
+                        }
+                        if (unwrappedAction is AStatus status)
+                        {
+                            if (status.status == Status.heat && status.targetPlayer == false) status.statusAmount += 1;
+                        }
+                    }
                 }
             }
-            return args.NewAmount;
         }
     }
 }

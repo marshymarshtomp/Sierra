@@ -48,7 +48,6 @@ internal sealed class PartingGiftCard : Card, IRegisterable
                 new ASpawn()
                 {
                     thing = new RepairKit(),
-                    multiBayVolley = true
                 },
                 new AMove()
                 {
@@ -60,7 +59,6 @@ internal sealed class PartingGiftCard : Card, IRegisterable
                 new ASpawn()
                 {
                     thing = new RepairKit(),
-                    multiBayVolley = true
                 },
                 new AMove()
                 {

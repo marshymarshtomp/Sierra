@@ -52,7 +52,6 @@ internal sealed class BarrelRollCard : Card, IRegisterable
             Upgrade.B => [
                  new ASpawn(){
                       thing = new OilDrum(),
-                     multiBayVolley = true,
                  },
                  new AStatus()
                  {
@@ -64,7 +63,7 @@ internal sealed class BarrelRollCard : Card, IRegisterable
             _ => [
                 new ASpawn(){
                     thing = new OilDrum(),
-                    multiBayVolley = true,
+
                 },
                 new AMove()
                 {

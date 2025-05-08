@@ -44,7 +44,7 @@ internal sealed class HuckinJunkCard : Card, IRegisterable
                 new ASpawn()
                 {
                     thing = new OilDrum(),
-                    multiBayVolley = true
+
                 },
                 new AMove()
                 {
@@ -54,7 +54,7 @@ internal sealed class HuckinJunkCard : Card, IRegisterable
                 new ASpawn()
                 {
                     thing = new OilDrum(),
-                    multiBayVolley = true
+
                 },
                 new AMove()
                 {
@@ -64,7 +64,7 @@ internal sealed class HuckinJunkCard : Card, IRegisterable
                 new ASpawn()
                 {
                     thing = new OilDrum(),
-                    multiBayVolley = true
+
                 }
             ],
 

@@ -41,11 +41,9 @@ internal sealed class MrBreaky : Artifact
     {
         combat.Queue(new AAddCard()
         {
-            card = new BonkCard()
-            {
-                temporaryOverride = true,
-            },
-            destination = CardDestination.Hand
+            card = new BonkCard(),
+            destination = CardDestination.Hand,
+            amount = 2
         });
     }
 }

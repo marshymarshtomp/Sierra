@@ -29,10 +29,7 @@ internal sealed class PassiveAggression : Artifact
             Name = ModEntry.Instance.AnyLocs.Bind(["artifact", "PassiveAggression", "name"]).Localize,
             Description = ModEntry.Instance.AnyLocs.Bind(["artifact", "PassiveAggression", "description"]).Localize
         });
-        ModEntry.Instance.Harmony.Patch(
-        original: AccessTools.DeclaredMethod(typeof(Card), nameof(Card.GetActionsOverridden)),
-        postfix: new HarmonyMethod(AccessTools.DeclaredMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(Card_GetActionsOverridden_Postfix)), priority: Priority.Normal)
-        );
+
     }
     public override List<Tooltip>? GetExtraTooltips()
     {
@@ -40,27 +37,8 @@ internal sealed class PassiveAggression : Artifact
             .. StatusMeta.GetTooltips(IntimidationManager.IntimidationStatus.Status, 1)
             ];
     }
-    private static void Card_GetActionsOverridden_Postfix(State s, ref List<CardAction> __result, Card __instance)
-    {
-        var card = __instance;
-        if (s.EnumerateAllArtifacts().FirstOrDefault(a => a is PassiveAggression) is not { } artifact) return;
-        if (s.route is Combat c)
-        {
-            if (s.deck.Contains(card) || c.discard.Contains(card) || c.exhausted.Contains(card) || c.hand.Contains(card))
-            {
-                foreach (var actions in __result)
-                {
-                    foreach (var unwrappedAction in ModEntry.Instance.KokoroApi.WrappedActions.GetWrappedCardActionsRecursively(actions))
-                    {
-                        if (unwrappedAction is AAttack attack)
-                        {
-                            attack.damage = Math.Clamp(attack.damage - 1, 0, attack.damage);
-                        }
-                    }
-                }
-            }
-        }
-    }
+
+
     public override void OnTurnStart(State state, Combat combat)
     {
         combat.Queue(new AStatus()
@@ -69,5 +47,13 @@ internal sealed class PassiveAggression : Artifact
             targetPlayer = false,
             statusAmount = 1
         });
+    }
+    public override int ModifyBaseDamage(int baseDamage, Card? card, State state, Combat? combat, bool fromPlayer)
+    {
+        if (state.EnumerateAllArtifacts().FirstOrDefault(a => a is PassiveAggression) is { } artifact)
+        {
+            if (fromPlayer == true) return -1;
+        }
+        return baseDamage;
     }
 }

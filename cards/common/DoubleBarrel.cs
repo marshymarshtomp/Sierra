@@ -43,7 +43,7 @@ internal sealed class DoubleBarrelCard : Card, IRegisterable
             Upgrade.B => [
                 new ASpawn()
                 {
-                    multiBayVolley = true,
+
                     thing = new OilDrum()
                 },
                 new AMove()
@@ -53,14 +53,14 @@ internal sealed class DoubleBarrelCard : Card, IRegisterable
                 },
                 new ASpawn()
                 {
-                    multiBayVolley = true,
+
                     thing = new OilDrum()
                 },
             ],
             _ => [
                 new ASpawn()
                 {
-                    multiBayVolley = true,
+
                     thing = new OilDrum()
                 },
                 new AMove()
@@ -70,7 +70,7 @@ internal sealed class DoubleBarrelCard : Card, IRegisterable
                 },
                 new ASpawn()
                 {
-                    multiBayVolley = true,
+
                     thing = new OilDrum()
                 }
             ],

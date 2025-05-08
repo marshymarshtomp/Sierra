@@ -25,7 +25,7 @@ internal sealed class MischiefCard : Card, IRegisterable, IHasCustomCardTraits
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocs.Bind(["card", "Mischief", "name"]).Localize,
-            Art = ModEntry.Instance.EndTrigger1.Sprite
+            Art = ModEntry.Instance.EndTrigger2.Sprite
         });
     }
     public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state) => upgrade switch
@@ -43,16 +43,18 @@ internal sealed class MischiefCard : Card, IRegisterable, IHasCustomCardTraits
         => upgrade switch
         {
             Upgrade.A => [
-                new AAttack()
-                {
-                    damage = GetDmg(s, 2),
-                    targetPlayer = false,
-                },
                 new AStatus()
                 {
+                    status = Status.shield,
+                    targetPlayer = true,
+                    statusAmount = 3
+                },
+                new AAttack()
+                {
+                    damage = GetDmg(s, 0),
+                    targetPlayer = false,
                     status = Status.heat,
-                    statusAmount = 3,
-                    targetPlayer = false
+                    statusAmount = 2
                 },
                 new ADummyAction(),
                 ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
@@ -64,9 +66,15 @@ internal sealed class MischiefCard : Card, IRegisterable, IHasCustomCardTraits
                 ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
             ],
             Upgrade.B => [
+                new AStatus()
+                {
+                    status = Status.shield,
+                    targetPlayer = true,
+                    statusAmount = 2
+                },
                 new AAttack()
                 {
-                    damage = GetDmg(s, 3),
+                    damage = GetDmg(s, 1),
                     targetPlayer = false,
                     status = Status.heat,
                     statusAmount = 3
@@ -81,9 +89,15 @@ internal sealed class MischiefCard : Card, IRegisterable, IHasCustomCardTraits
                 ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
             ],
             _ => [
+                new AStatus()
+                {
+                    status = Status.shield,
+                    targetPlayer = true,
+                    statusAmount = 2
+                },
                 new AAttack()
                 {
-                    damage = GetDmg(s, 2),
+                    damage = GetDmg(s, 0),
                     targetPlayer = false,
                     status = Status.heat,
                     statusAmount = 2

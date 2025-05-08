@@ -43,7 +43,13 @@ internal sealed class MayhemCard : Card, IRegisterable
                 {
                     status = Status.shield,
                     targetPlayer = true,
-                    statusAmount = 1
+                    statusAmount = 3
+                },
+                new AAttack()
+                {
+                    damage = GetDmg(s, 0),
+                    status = Status.heat,
+                    statusAmount = 2
                 },
                 new AAttack()
                 {
@@ -74,8 +80,8 @@ internal sealed class MayhemCard : Card, IRegisterable
                 new AStatus()
                 {
                     status = Status.heat,
-                    statusAmount = 1,
-                    targetPlayer = true
+                    targetPlayer = true,
+                    statusAmount = 1
                 }
             ],
             _ => [
@@ -83,7 +89,7 @@ internal sealed class MayhemCard : Card, IRegisterable
                 {
                     status = Status.shield,
                     targetPlayer = true,
-                    statusAmount = 2
+                    statusAmount = 3
                 },
                 new AAttack()
                 {
@@ -96,6 +102,12 @@ internal sealed class MayhemCard : Card, IRegisterable
                     damage = GetDmg(s, 0),
                     status = Status.heat,
                     statusAmount = 2
+                },
+                new AStatus()
+                {
+                    status = Status.heat,
+                    targetPlayer = true,
+                    statusAmount = 1
                 }
             ],
 
