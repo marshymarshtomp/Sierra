@@ -32,8 +32,7 @@ internal sealed class MayhemCard : Card, IRegisterable
     public override CardData GetData(State state)
         => upgrade switch
         {
-            Upgrade.A => new() { cost = 1, infinite = true },
-            _ => new() { cost = 2 },
+            _ => new() { cost = 2 }
         };
     public override List<CardAction> GetActions(State s, Combat c)
         => upgrade switch

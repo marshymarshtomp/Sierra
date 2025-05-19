@@ -33,7 +33,7 @@ internal sealed class HammerlockCard : Card, IRegisterable
         => upgrade switch
         {
             Upgrade.A => new() { cost = 1, description = ModEntry.Instance.Locs.Localize(["card", "Hammerlock", "description", upgrade.ToString()]) },
-            Upgrade.B => new() { cost = 1, description = ModEntry.Instance.Locs.Localize(["card", "Hammerlock", "description", upgrade.ToString()]) },
+            Upgrade.B => new() { cost = 1, exhaust = true, description = ModEntry.Instance.Locs.Localize(["card", "Hammerlock", "description", upgrade.ToString()]) },
             _ => new() { cost = 1, description = ModEntry.Instance.Locs.Localize(["card", "Hammerlock", "description", upgrade.ToString()]) },
         };
     public override List<CardAction> GetActions(State s, Combat c)
