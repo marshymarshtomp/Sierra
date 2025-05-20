@@ -11,7 +11,7 @@ using Sierra;
 
 namespace Sierra.cards.common;
 
-internal sealed class MayhemCard : Card, IRegisterable
+internal sealed class MayhemCard : Card, IRegisterable, IHasCustomCardTraits
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -25,14 +25,17 @@ internal sealed class MayhemCard : Card, IRegisterable
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocs.Bind(["card", "Mayhem", "name"]).Localize,
-            Art = ModEntry.Instance.Helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/card/Scorch.png")).Sprite
+            Art = ModEntry.Instance.EndTrigger2.Sprite
         });
     }
-
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state) => upgrade switch
+    {
+        _ => new HashSet<ICardTraitEntry>() { TurnEndTriggerTraitManager.TurnEndTriggerTrait }
+    };
     public override CardData GetData(State state)
         => upgrade switch
         {
-            _ => new() { cost = 2 }
+            _ => new() { cost = 1 }
         };
     public override List<CardAction> GetActions(State s, Combat c)
         => upgrade switch
@@ -40,74 +43,71 @@ internal sealed class MayhemCard : Card, IRegisterable
             Upgrade.A => [
                 new AStatus()
                 {
-                    status = Status.shield,
+                    status = Status.evade,
+                    targetPlayer = true,
+                    statusAmount = 1
+                },
+                new AStatus()
+                {
+                    status = Status.tempShield,
                     targetPlayer = true,
                     statusAmount = 3
                 },
-                new AAttack()
-                {
-                    damage = GetDmg(s, 0),
-                    status = Status.heat,
-                    statusAmount = 2
-                },
-                new AAttack()
-                {
-                    damage = GetDmg(s, 0),
-                    status = Status.heat,
-                    statusAmount = 2
-                }
+                new ADummyAction(),
+                ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
+                    new AStatus()
+                    {
+                        status = Status.heat,
+                        statusAmount = 1,
+                        targetPlayer = true
+                    }
+                ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
             ],
             Upgrade.B => [
                 new AStatus()
                 {
-                    status = Status.shield,
+                    status = Status.evade,
                     targetPlayer = true,
-                    statusAmount = 3
-                },
-                new AAttack()
-                {
-                    damage = GetDmg(s, 1),
-                    status = Status.heat,
-                    statusAmount = 2
-                },
-                new AAttack()
-                {
-                    damage = GetDmg(s, 1),
-                    status = Status.heat,
                     statusAmount = 2
                 },
                 new AStatus()
                 {
-                    status = Status.heat,
+                    status = Status.tempShield,
                     targetPlayer = true,
-                    statusAmount = 1
-                }
+                    statusAmount = 2
+                },
+                new ADummyAction(),
+                ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
+                    new AStatus()
+                    {
+                        status = Status.heat,
+                        statusAmount = 2,
+                        targetPlayer = true
+                    }
+                ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
             ],
             _ => [
                 new AStatus()
                 {
-                    status = Status.shield,
+                    status = Status.evade,
                     targetPlayer = true,
-                    statusAmount = 3
-                },
-                new AAttack()
-                {
-                    damage = GetDmg(s, 0),
-                    status = Status.heat,
-                    statusAmount = 2
-                },
-                new AAttack()
-                {
-                    damage = GetDmg(s, 0),
-                    status = Status.heat,
-                    statusAmount = 2
+                    statusAmount = 1
                 },
                 new AStatus()
                 {
-                    status = Status.heat,
+                    status = Status.tempShield,
                     targetPlayer = true,
-                    statusAmount = 1
-                }
+                    statusAmount = 2
+                },
+                new ADummyAction(),
+                ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
+                    new AStatus()
+                    {
+                        status = Status.heat,
+                        statusAmount = 1,
+                        targetPlayer = true
+                    }
+                ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
             ],
 
         };

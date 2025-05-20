@@ -30,39 +30,19 @@ internal sealed class CheapBeer : Artifact
             Description = ModEntry.Instance.AnyLocs.Bind(["artifact", "CheapBeer", "description"]).Localize
         });
         ModEntry.Instance.Harmony.Patch(
-                original: AccessTools.DeclaredMethod(typeof(Combat), nameof(Combat.DestroyDroneAt)),
-                postfix: new HarmonyMethod(AccessTools.DeclaredMethod(MethodBase.GetCurrentMethod()!.DeclaringType, nameof(Combat_DestroyDroneAt_Postfix)))
-                );
+                original: AccessTools.Method(typeof(AStatus), nameof(AStatus.Begin)),
+                prefix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(AStatus_Begin_Prefix))
+            );
     }
-    public override List<Tooltip>? GetExtraTooltips()
+    public override int ModifyStatusAmount(int baseAmount, Card card, State state, Combat? combat)
     {
-        return [
-            .. StatusMeta.GetTooltips(IntimidationManager.IntimidationStatus.Status, 1)
-            ];
+        return base.ModifyStatusAmount(baseAmount, card, state, combat);
     }
-    private static void Combat_DestroyDroneAt_Postfix(State s, int x, bool playerDidIt)
+    private static void AStatus_Begin_Prefix (State s, AStatus __instance)
     {
-        if (s.route is Combat c)
+        if (s.EnumerateAllArtifacts().FirstOrDefault(a => a is CheapBeer) is { } artifact)
         {
-            if (s.EnumerateAllArtifacts().FirstOrDefault(a => a is CheapBeer) is { } artifact)
-            {
-                c.Queue(new AEnergy()
-                {
-                    changeAmount = 2
-                });
-            }
-        }
-    }
-    public override void OnTurnStart(State state, Combat combat)
-    {
-        if (state.ship.Get(IntimidationManager.IntimidationStatus.Status) < 4)
-        {
-            combat.Queue(new AStatus()
-            {
-                status = IntimidationManager.IntimidationStatus.Status,
-                targetPlayer = true,
-                statusAmount = 1
-            });
+            if (!DB.statuses[__instance.status].isGood && __instance.statusAmount > 0) __instance.statusAmount += 1;
         }
     }
 }

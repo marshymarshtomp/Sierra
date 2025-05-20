@@ -11,7 +11,7 @@ using Sierra;
 
 namespace Sierra.cards.common;
 
-internal sealed class BurnBabyBurnCard : Card, IRegisterable, IHasCustomCardTraits
+internal sealed class BurnBabyBurnCard : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -25,75 +25,46 @@ internal sealed class BurnBabyBurnCard : Card, IRegisterable, IHasCustomCardTrai
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocs.Bind(["card", "BurnBabyBurn", "name"]).Localize,
-            Art = ModEntry.Instance.EndTrigger1.Sprite
+            Art = ModEntry.Instance.Helper.Content.Sprites.RegisterSprite(ModEntry.Instance.Package.PackageRoot.GetRelativeFile("assets/card/Scorch.png")).Sprite
         });
     }
-    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state) => upgrade switch
-    {
-        _ => new HashSet<ICardTraitEntry>() { TurnEndTriggerTraitManager.TurnEndTriggerTrait }
-    };
 
     public override CardData GetData(State state)
         => upgrade switch
         {
+            Upgrade.A => new() { cost = 0 },
             _ => new() { cost = 1 },
         };
     public override List<CardAction> GetActions(State s, Combat c)
         => upgrade switch
         {
-            Upgrade.A => [
-                new AAttack()
-                {
-                    damage = GetDmg(s, 1),
-                    status = OilManager.OilStatus.Status,
-                    statusAmount = 1,
-                    targetPlayer = false
-                },
-                new ADummyAction(),
-                ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
-                        new AStatus()
-                        {
-                            status = Status.heat,
-                            statusAmount = 3,
-                            targetPlayer = false
-                        }
-                    ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
-            ],
             Upgrade.B => [
                 new AAttack()
                 {
-                    damage = GetDmg(s, 1),
-                    status = OilManager.OilStatus.Status,
-                    statusAmount = 2,
-                    targetPlayer = false
+                    damage = GetDmg(s, 0),
+                    status = Status.heat,
+                    statusAmount = 3
                 },
-                new ADummyAction(),
-                ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
-                        new AStatus()
-                        {
-                            status = Status.heat,
-                            statusAmount = 2,
-                            targetPlayer = false
-                        }
-                    ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
+                new AAttack()
+                {
+                    damage = GetDmg(s, 0),
+                    status = Status.heat,
+                    statusAmount = 3
+                }
             ],
             _ => [
                 new AAttack()
                 {
-                    damage = GetDmg(s, 1),
-                    status = OilManager.OilStatus.Status,
-                    statusAmount = 1,
-                    targetPlayer = false
+                    damage = GetDmg(s, 0),
+                    status = Status.heat,
+                    statusAmount = 2
                 },
-                new ADummyAction(),
-                ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
-                        new AStatus()
-                        {
-                            status = Status.heat,
-                            statusAmount = 2,
-                            targetPlayer = false
-                        }
-                    ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
+                new AAttack()
+                {
+                    damage = GetDmg(s, 0),
+                    status = Status.heat,
+                    statusAmount = 2
+                }
             ],
 
         };

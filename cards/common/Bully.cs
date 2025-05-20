@@ -32,31 +32,18 @@ internal sealed class BullyCard : Card, IRegisterable
     public override CardData GetData(State state)
         => upgrade switch
         {
+            Upgrade.A => new() { cost = 0 },
             _ => new() { cost = 1 },
         };
     public override List<CardAction> GetActions(State s, Combat c)
         => upgrade switch
         {
-            Upgrade.A => [
+            Upgrade.B => [
                 new AAttack()
                 {
                     status = IntimidationManager.IntimidationStatus.Status,
                     statusAmount = 2,
                     damage = GetDmg(s, 1)
-                }
-            ],
-            Upgrade.B => [
-                new AAttack()
-                {
-                    status = IntimidationManager.IntimidationStatus.Status,
-                    statusAmount = 3,
-                    damage = GetDmg(s, 0)
-                },
-                new AStatus()
-                {
-                    status = Status.heat,
-                    statusAmount = 1,
-                    targetPlayer = true
                 }
             ],
             _ => [

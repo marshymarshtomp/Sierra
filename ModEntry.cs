@@ -37,11 +37,11 @@ public sealed class ModEntry: SimpleMod
             typeof(BullyCard),
             typeof(BurnBabyBurnCard),
             typeof(DoubleBarrelCard),
-            typeof(FlameDanceCard),
-            typeof(InsolationCard),
+            typeof(DeepFryCard),
             typeof(MayhemCard),
             typeof(BoozeCruiseCard),
-            typeof(BonkCard)
+            typeof(BonkCard),
+            typeof(PumpTheGasCard)
         ];
     internal static readonly IReadOnlyList<Type> UncommonCardTypes = [
             typeof(BlisterBlasterCard),
@@ -49,7 +49,7 @@ public sealed class ModEntry: SimpleMod
             typeof(FuseCard),
             typeof(HuckinJunkCard),
             typeof(PartingGiftCard),
-            typeof(PumpTheGasCard),
+            typeof(DrunkenFuryCard),
             typeof(SadismCard)
         ];
     internal static readonly IReadOnlyList<Type> RareCardTypes = [
@@ -57,7 +57,7 @@ public sealed class ModEntry: SimpleMod
             typeof(AddictionCard),
             typeof(CantripCard),
             typeof(HotCommodityCard),
-            typeof(WildfireCard)
+            typeof(FOMOCard)
         ];
     internal static readonly IEnumerable<Type> AllCardTypes = 
         [
@@ -178,8 +178,8 @@ public sealed class ModEntry: SimpleMod
                 starterDeck: new StarterDeck
                     {
                         cards = [
-                            new FlameDanceCard(),
-                            new BurnBabyBurnCard()
+                            new MayhemCard(),
+                            new DeepFryCard()
                         ]
                     }
                 )

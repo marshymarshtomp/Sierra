@@ -53,8 +53,7 @@ internal sealed class SadismCard : Card, IRegisterable
                 },
                 new ASpawn()
                 {
-                    thing = new OilDrum(),
-                    multiBayVolley = true
+                    thing = new OilDrum()
                 }
             ],
             _ => [

@@ -23,11 +23,17 @@
     "Mischief": {
       "name": "Mischief"
     },
-    "FlameDance": {
-      "name": "Flame Dance"
-    },
     "BurnBabyBurn": {
       "name": "Burn, Baby, Burn"
+    },
+    "DeepFry": {
+      "name": "Deep Fry"
+    },
+    "FOMO": {
+      "name": "FOMO"
+    },
+    "DrunkenFury": {
+      "name": "Drunken Fury"
     },
     "BobAndWeave": {
       "name": "Bob and Weave"
@@ -133,7 +139,7 @@
   "artifact": {
     "CheapBeer": {
       "name": "CHEAP BEER",
-      "description": "Gain 2 <c=energy>ENERGY</c> whenever you destroy a <c=midrow>midrow object</c>. <c=downside>Every turn, if you have less than 4 <c=status>INTIMIDATION</c>, gain 1 <c=status>INTIMIDATION</c></c>."
+      "description": "Increase <c=keyword>ALL</c> <c=downside>negative statuses</c> applied and gained by 1."
     },
     "PassiveAggression": {
       "name": "PASSIVE AGGRESSION",

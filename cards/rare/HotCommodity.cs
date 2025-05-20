@@ -41,15 +41,13 @@ internal sealed class HotCommodityCard : Card, IRegisterable
             Upgrade.A => [
                 new ASpawn()
                 {
-                    thing = new RepairKit(),
-                    multiBayVolley = true
+                    thing = new RepairKit()
                 }
             ],
             Upgrade.B => [
                 new ASpawn()
                 {
-                    thing = new RepairKit(),
-                    multiBayVolley = true
+                    thing = new RepairKit()
                 },                
                 new AStatus()
                 {
@@ -61,8 +59,7 @@ internal sealed class HotCommodityCard : Card, IRegisterable
             _ => [
                 new ASpawn()
                 {
-                    thing = new RepairKit(),
-                    multiBayVolley = true
+                    thing = new RepairKit()
                 },
                 new AStatus()
                 {

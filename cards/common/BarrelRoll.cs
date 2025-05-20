@@ -40,8 +40,7 @@ internal sealed class BarrelRollCard : Card, IRegisterable
         {
             Upgrade.A => [
                 new ASpawn(){
-                    thing = new OilDrum(),
-                    multiBayVolley = true,
+                    thing = new OilDrum()
                 },
                 new AMove()
                 {

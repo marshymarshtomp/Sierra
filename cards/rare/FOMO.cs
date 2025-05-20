@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using Sierra.features;
 using Sierra;
 
-namespace Sierra.cards.common;
+namespace Sierra.cards.rare;
 
-internal sealed class FlameDanceCard : Card, IRegisterable, IHasCustomCardTraits
+internal sealed class FOMOCard : Card, IRegisterable, IHasCustomCardTraits
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -21,11 +21,11 @@ internal sealed class FlameDanceCard : Card, IRegisterable, IHasCustomCardTraits
             Meta = new()
             {
                 deck = ModEntry.Instance.SierraDeck.Deck,
-                rarity = Rarity.common,
+                rarity = Rarity.rare,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocs.Bind(["card", "FlameDance", "name"]).Localize,
-            Art = ModEntry.Instance.EndTrigger2.Sprite
+            Name = ModEntry.Instance.AnyLocs.Bind(["card", "FOMO", "name"]).Localize,
+            Art = ModEntry.Instance.EndTrigger1.Sprite
         });
     }
     public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state) => upgrade switch
@@ -36,56 +36,57 @@ internal sealed class FlameDanceCard : Card, IRegisterable, IHasCustomCardTraits
     public override CardData GetData(State state)
         => upgrade switch
         {
-            Upgrade.A => new() { cost = 0 },
             _ => new() { cost = 1 },
         };
     public override List<CardAction> GetActions(State s, Combat c)
         => upgrade switch
         {
-            Upgrade.B => [
-                new AStatus()
+            Upgrade.A => [
+                new ASpawn()
                 {
-                    status = Status.tempShield,
-                    statusAmount = 4,
-                    targetPlayer = true
-                },
-                new AStatus()
-                {
-                    status = Status.heat,
-                    statusAmount = 1,
-                    targetPlayer = true
+                    thing = new RepairKit()
                 },
                 new ADummyAction(),
                 ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
-                        new AStatus()
-                        {
-                            status = OilManager.OilStatus.Status,
-                            statusAmount = 2,
-                            targetPlayer = true
-                        }
+                    new AStatus()
+                    {
+                        status = IntimidationManager.IntimidationStatus.Status,
+                        targetPlayer = true,
+                        statusAmount = 1
+                    }
+                ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
+            ],
+            Upgrade.B => [
+                new ASpawn()
+                {
+                    thing = new RepairKit()
+                    {
+                        bubbleShield = true
+                    }
+                },
+                new ADummyAction(),
+                ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
+                    new AStatus()
+                    {
+                        status = IntimidationManager.IntimidationStatus.Status,
+                        targetPlayer = true,
+                        statusAmount = 2
+                    }
                 ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
             ],
             _ => [
-                new AStatus()
+                new ASpawn()
                 {
-                    status = Status.tempShield,
-                    statusAmount = 3,
-                    targetPlayer = true
-                },
-                new AStatus()
-                {
-                    status = Status.heat,
-                    statusAmount = 1,
-                    targetPlayer = true
+                    thing = new RepairKit()
                 },
                 new ADummyAction(),
                 ModEntry.Instance.KokoroApi.OnTurnEnd.MakeAction(
-                        new AStatus()
-                        {
-                            status = OilManager.OilStatus.Status,
-                            statusAmount = 1,
-                            targetPlayer = true
-                        }
+                    new AStatus()
+                    {
+                        status = IntimidationManager.IntimidationStatus.Status,
+                        targetPlayer = true,
+                        statusAmount = 2
+                    }
                 ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction
             ],
 
