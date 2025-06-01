@@ -48,7 +48,7 @@ internal sealed class BoozeCruiseCard : Card, IRegisterable
                 },
                 new AStatus()
                 {
-                    status = OilManager.OilStatus.Status,
+                    status = Status.tempShield,
                     statusAmount = 1,
                     targetPlayer = true
                 }
@@ -62,7 +62,7 @@ internal sealed class BoozeCruiseCard : Card, IRegisterable
                 },
                 new AStatus()
                 {
-                    status = OilManager.OilStatus.Status,
+                    status = Status.tempShield,
                     statusAmount = 1,
                     targetPlayer = true
                 }
