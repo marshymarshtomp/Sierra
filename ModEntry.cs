@@ -68,7 +68,6 @@ public sealed class ModEntry: SimpleMod
 
     internal static readonly IReadOnlyList<Type> CommonArtifacts = [
             typeof(SlimeAndPunishment),
-            typeof(ThickGel),
             typeof(MrBreaky),
             typeof(SpaceJunk)
         ];

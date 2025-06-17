@@ -151,11 +151,7 @@
     },
     "SlimeAndPunishment": {
       "name": "SLIME & PUNISHMENT",
-      "description": "Whenever you gain <c=status>OIL</c> or destroy a <c=midrow>midrow object</c>, gain 1 <c=status>TEMP SHIELD</c>."
-    },
-    "ThickGel": {
-      "name": "THICK GEL",
-      "description": "Every turn, if you have 2 or more <c=status>OIL</c>, lose 1 <c=status>HEAT</c>."
+      "description": "Whenever the enemy gains <c=status>OIL</c> for the first time each turn, they lose 1 hull."
     },
     "SpaceJunk": {
       "name": "SPACE JUNK",

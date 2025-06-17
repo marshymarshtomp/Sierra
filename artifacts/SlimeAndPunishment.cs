@@ -13,6 +13,7 @@ namespace Sierra.artifacts;
 
 internal sealed class SlimeAndPunishment : Artifact
 {
+    public bool hasTriggered = false;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         Type type = MethodBase.GetCurrentMethod()!.DeclaringType!;
@@ -30,45 +31,40 @@ internal sealed class SlimeAndPunishment : Artifact
             Description = ModEntry.Instance.AnyLocs.Bind(["artifact", "SlimeAndPunishment", "description"]).Localize
         });
         ModEntry.Instance.Harmony.Patch(
-            original: AccessTools.DeclaredMethod(typeof(Combat), nameof(Combat.DestroyDroneAt)),
-            postfix: new HarmonyMethod(AccessTools.DeclaredMethod(MethodBase.GetCurrentMethod()!.DeclaringType, nameof(Combat_DestroyDroneAt_Postfix)))
+            original: AccessTools.DeclaredMethod(typeof(AStatus), nameof(AStatus.Begin)),
+            postfix: new HarmonyMethod(AccessTools.DeclaredMethod(MethodBase.GetCurrentMethod()!.DeclaringType, nameof(AStatus_Begin_Postfix)))
         );
     }
     public override List<Tooltip>? GetExtraTooltips()
     {
         return [
-            .. StatusMeta.GetTooltips(OilManager.OilStatus.Status, 1),
-            .. StatusMeta.GetTooltips(Status.tempShield, 1)
+            .. StatusMeta.GetTooltips(OilManager.OilStatus.Status, 1)
             ];
     }
-    private static void Combat_DestroyDroneAt_Postfix(State s, int x, bool playerDidIt)
+    private static void AStatus_Begin_Postfix(State s, Combat c, AStatus __instance)
     {
-        if (s.route is Combat c)
+        
+        if ((SlimeAndPunishment)s.EnumerateAllArtifacts().FirstOrDefault(a => a is SlimeAndPunishment) is { } artifact)
         {
-            if (s.EnumerateAllArtifacts().FirstOrDefault(a => a is SlimeAndPunishment) is { } artifact)
+            if (__instance.status == OilManager.OilStatus.Status && !__instance.targetPlayer && !artifact.hasTriggered)
             {
-                if (playerDidIt)
+                c.QueueImmediate(new AHurt()
                 {
-                    c.Queue(new AStatus()
-                    {
-                        targetPlayer = true,
-                        status = Status.tempShield,
-                        statusAmount = 1
-                    });
-                }
+                    targetPlayer = false,
+                    hurtAmount = 1,
+                    hurtShieldsFirst = false
+                });
+                artifact.Pulse();
+                artifact.hasTriggered = true;
             }
         }
     }
-    public override void AfterPlayerStatusAction(State state, Combat combat, Status status, AStatusMode mode, int statusAmount)
+    public override void OnCombatStart(State state, Combat combat)
     {
-        if (status == IntimidationManager.IntimidationStatus.Status)
-        {
-            combat.Queue(new AStatus()
-            {
-                targetPlayer = true,
-                status = Status.tempShield,
-                statusAmount = 1
-            });
-        }
+        hasTriggered = false;
+    }
+    public override void OnTurnStart(State state, Combat combat)
+    {
+        hasTriggered = false;
     }
 }

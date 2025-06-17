@@ -42,7 +42,7 @@ internal sealed class CheapBeer : Artifact
     {
         if (s.EnumerateAllArtifacts().FirstOrDefault(a => a is CheapBeer) is { } artifact)
         {
-            if (!DB.statuses[__instance.status].isGood && __instance.statusAmount > 0) __instance.statusAmount += 1;
+            if (!DB.statuses[__instance.status].isGood) __instance.statusAmount += 1;
         }
     }
 }

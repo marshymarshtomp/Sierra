@@ -13,9 +13,6 @@ namespace Sierra.features;
 
 internal sealed class IntimidationManager : IRegisterable
 {
-    private static bool fromAAttack = false;
-    private static StuffBase? theStuff;
-    private static int stuffTime = 0;
     internal static IStatusEntry IntimidationStatus { get; private set; } = null!;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {

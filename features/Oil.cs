@@ -30,7 +30,7 @@ internal sealed class OilManager : IRegisterable
         public int ModifyStatusChange(IModifyStatusChangeArgs args)
         {
             var isPlayerShip = args.Ship.isPlayerShip;
-         if (args.Status == Status.heat)
+            if (args.Status == Status.heat)
             {
                 if (args.OldAmount >= args.NewAmount || args.NewAmount <= 0) return args.NewAmount;
                 var oil = args.Ship.Get(OilStatus.Status);
