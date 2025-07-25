@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <ModLoaderPath>E:\Pobrane\Nickel-1.16\Nickel</ModLoaderPath>
-    <Version>1.2.1</Version>
+    <Version>1.2.3</Version>
   </PropertyGroup>
 
   <ItemGroup>

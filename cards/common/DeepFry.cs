@@ -53,7 +53,7 @@ internal sealed class DeepFryCard : Card, IRegisterable, IHasCustomCardTraits
                     new AStatus()
                     {
                         status = Status.heat,
-                        statusAmount = 2,
+                        statusAmount = 3,
                         targetPlayer = false
                     }
                 ).SetShowOnTurnEndIcon(false).SetShowOnTurnEndTooltip(false).AsCardAction

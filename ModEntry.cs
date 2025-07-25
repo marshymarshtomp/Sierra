@@ -98,6 +98,7 @@ public sealed class ModEntry: SimpleMod
     internal ISpriteEntry PumpTheGasFlipped { get; }
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
     {
+        var sprite = helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/char/sierra_character_neutral_0.png")).Sprite;
         Instance = this;
         Harmony = helper.Utilities.Harmony;
         KokoroApi = helper.ModRegistry.GetApi<IKokoroApi>("Shockah.Kokoro")!.V2!;
@@ -142,7 +143,7 @@ public sealed class ModEntry: SimpleMod
                 CharacterType = SierraDeck.UniqueName,
                 LoopTag = "neutral",
                 Frames = [
-                    helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/char/sierra_character_neutral_0.png")).Sprite
+                    sprite
                     ]
             },
             MiniAnimation = new()
@@ -165,8 +166,17 @@ public sealed class ModEntry: SimpleMod
             CharacterType = SierraDeck.UniqueName,
             LoopTag = "gameover",
             Frames = [
-                helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile("assets/char/sierra_character_neutral_0.png")).Sprite
+                sprite
                 ]
+        });
+
+        helper.Content.Characters.V2.RegisterCharacterAnimation(new()
+        {
+            CharacterType = SierraDeck.UniqueName,
+            LoopTag = "squint",
+            Frames = [
+            sprite
+        ]
         });
 
         helper.ModRegistry.AwaitApi<IMoreDifficultiesApi>(
