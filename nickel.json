@@ -6,6 +6,9 @@
   "RequiredApiVersion": "0.12.0",
   "EntryPointAssembly": "Sierra.dll",
   "IsLegacyMod": "false",
+  "MethodsToStopInlining": [
+    { "TypeName":  "Combat", "MethodName":  "IsVisible" }
+  ],
   "Dependencies": [
     {
       "UniqueName": "Shockah.Kokoro",
